@@ -12,7 +12,7 @@ interface CardDao {
     @Query("SELECT * FROM cards ORDER BY name ASC")
     fun getAllCardsSortedByName(): Flow<List<CardEntity>>
 
-    @Query("SELECT * FROM cards ORDER BY marketPrice DESC NULLS LAST")
+    @Query("SELECT * FROM cards ORDER BY CASE WHEN marketPrice IS NULL THEN 1 ELSE 0 END ASC, marketPrice DESC")
     fun getAllCardsSortedByValue(): Flow<List<CardEntity>>
 
     @Query("SELECT * FROM cards ORDER BY setName ASC, number ASC")
