@@ -79,7 +79,8 @@ fun StatsScreen(
                 )
             }
 
-            if (uiState.totalValue != null && uiState.totalValue > 0) {
+            val totalValue = uiState.totalValue
+            if (totalValue != null && totalValue > 0) {
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer),
@@ -102,7 +103,7 @@ fun StatsScreen(
                                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                             )
                             Text(
-                                currencyFormat.format(uiState.totalValue),
+                                currencyFormat.format(totalValue),
                                 style = MaterialTheme.typography.headlineMedium,
                                 fontWeight = FontWeight.ExtraBold,
                                 color = MaterialTheme.colorScheme.primary,
