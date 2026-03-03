@@ -16,7 +16,6 @@ gson = "2.11.0"
 coil = "2.7.0"
 camerax = "1.4.1"
 mlkitTextRecognition = "16.0.1"
-mlkitObjectDetection = "17.0.2"
 coroutines = "1.9.0"
 datastore = "1.1.2"
 splashScreen = "1.0.1"
@@ -63,7 +62,6 @@ camerax-view = { group = "androidx.camera", name = "camera-view", version.ref = 
 
 # ML Kit
 mlkit-text-recognition = { group = "com.google.mlkit", name = "text-recognition", version.ref = "mlkitTextRecognition" }
-mlkit-object-detection = { group = "com.google.mlkit", name = "object-detection", version.ref = "mlkitObjectDetection" }
 
 # Coroutines
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }

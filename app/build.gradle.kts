@@ -90,7 +90,6 @@ dependencies {
 
     // ML Kit
     implementation(libs.mlkit.text.recognition)
-    implementation(libs.mlkit.object.detection)
 
     // Coroutines
     implementation(libs.kotlinx.coroutines.android)
