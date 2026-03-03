@@ -16,12 +16,9 @@
         android:pathData="M54,54 m-28,0 a28,28 0 0,0 56,0 Z" />
 
     <!-- Pokeball center line -->
-    <rect
+    <path
         android:fillColor="#FFFFFF"
-        android:height="4"
-        android:width="60"
-        android:x="24"
-        android:y="52" />
+        android:pathData="M24,52 L84,52 L84,56 L24,56 Z" />
 
     <!-- Pokeball center button -->
     <path
@@ -33,19 +30,13 @@
         android:fillColor="#FFFFFF"
         android:pathData="M54,54 m-5,0 a5,5 0 1,1 10,0 a5,5 0 1,1 -10,0" />
 
-    <!-- Card symbol lines -->
-    <rect
+    <!-- Card symbol line 1 -->
+    <path
         android:fillColor="#FFCC00"
-        android:height="3"
-        android:width="16"
-        android:x="70"
-        android:y="28"
-        android:rx="1.5" />
-    <rect
+        android:pathData="M71.5,28 L84.5,28 A1.5,1.5 0 0,1 86,29.5 L86,29.5 A1.5,1.5 0 0,1 84.5,31 L71.5,31 A1.5,1.5 0 0,1 70,29.5 L70,29.5 A1.5,1.5 0 0,1 71.5,28 Z" />
+
+    <!-- Card symbol line 2 -->
+    <path
         android:fillColor="#FFCC00"
-        android:height="3"
-        android:width="12"
-        android:x="70"
-        android:y="34"
-        android:rx="1.5" />
+        android:pathData="M71.5,34 L80.5,34 A1.5,1.5 0 0,1 82,35.5 L82,35.5 A1.5,1.5 0 0,1 80.5,37 L71.5,37 A1.5,1.5 0 0,1 70,35.5 L70,35.5 A1.5,1.5 0 0,1 71.5,34 Z" />
 </vector>
