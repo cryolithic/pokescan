@@ -186,17 +186,23 @@ private fun CameraPreview(
                                     )
                                     textRecognizer.process(image)
                                         .addOnSuccessListener { visionText ->
-                                            // Use the topmost text block — on a Pokemon card that's
-                                            // almost always the card name. Passing the full flat
-                                            // visionText.text includes set numbers, flavor text,
-                                            // HP values, etc., which confuses cleanOcrText.
-                                            val topBlockText = visionText.textBlocks
-                                                .filter { it.boundingBox != null }
-                                                .minByOrNull { it.boundingBox!!.top }
+                                            // The card name is always in the largest text on the
+                                            // card. Picking by topmost Y fails for Trainer/Item
+                                            // cards where the type label ("Trainer  Item") sits
+                                            // above the name. Instead, pick the block whose tallest
+                                            // line has the largest bounding-box height — that's the
+                                            // largest font, which is always the card name.
+                                            val largestBlockText = visionText.textBlocks
+                                                .filter { it.lines.isNotEmpty() }
+                                                .maxByOrNull { block ->
+                                                    block.lines.maxOf { line ->
+                                                        line.boundingBox?.height() ?: 0
+                                                    }
+                                                }
                                                 ?.text
                                                 ?: visionText.text
-                                            if (topBlockText.isNotBlank()) {
-                                                onTextDetected(topBlockText)
+                                            if (largestBlockText.isNotBlank()) {
+                                                onTextDetected(largestBlockText)
                                             }
                                         }
                                         .addOnCompleteListener { imageProxy.close() }
