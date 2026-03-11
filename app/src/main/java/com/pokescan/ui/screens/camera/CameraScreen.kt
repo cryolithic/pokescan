@@ -186,8 +186,17 @@ private fun CameraPreview(
                                     )
                                     textRecognizer.process(image)
                                         .addOnSuccessListener { visionText ->
-                                            if (visionText.text.isNotBlank()) {
-                                                onTextDetected(visionText.text)
+                                            // Use the topmost text block — on a Pokemon card that's
+                                            // almost always the card name. Passing the full flat
+                                            // visionText.text includes set numbers, flavor text,
+                                            // HP values, etc., which confuses cleanOcrText.
+                                            val topBlockText = visionText.textBlocks
+                                                .filter { it.boundingBox != null }
+                                                .minByOrNull { it.boundingBox!!.top }
+                                                ?.text
+                                                ?: visionText.text
+                                            if (topBlockText.isNotBlank()) {
+                                                onTextDetected(topBlockText)
                                             }
                                         }
                                         .addOnCompleteListener { imageProxy.close() }

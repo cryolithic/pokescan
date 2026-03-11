@@ -56,7 +56,9 @@ class CardRepository @Inject constructor(
 
     /** Search the Pokemon TCG API for cards matching [query]. */
     suspend fun searchOnlineCards(query: String): Result<List<ApiCard>> = runCatching {
-        api.searchCards(query = "name:$query*").data
+        // Quotes are required for multi-word names; without them the API treats each word
+        // as a separate Lucene term (e.g. `name:Power Tablet*` → name:Power AND Tablet*).
+        api.searchCards(query = "name:\"$query\"").data
     }
 
     /** Fetch full card details + prices from the API and refresh the local DB entry. */
