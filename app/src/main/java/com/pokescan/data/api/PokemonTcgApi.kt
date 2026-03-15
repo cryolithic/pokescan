@@ -13,13 +13,11 @@ interface PokemonTcgApi {
         @Query("page") page: Int = 1,
         @Query("pageSize") pageSize: Int = 20,
         @Query("orderBy") orderBy: String = "name",
-        @Header("X-Api-Key") apiKey: String = "",
     ): CardSearchResponse
 
     @GET("cards/{id}")
     suspend fun getCard(
         @Path("id") id: String,
-        @Header("X-Api-Key") apiKey: String = "",
     ): SingleCardResponse
 
     // Search by card name only

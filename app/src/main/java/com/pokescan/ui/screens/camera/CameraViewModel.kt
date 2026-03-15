@@ -75,18 +75,25 @@ class CameraViewModel @Inject constructor(
     }
 
     private fun cleanOcrText(text: String): String {
-        // Extract the most likely card name from OCR text
-        // Card names typically appear on the first line or in large text
         val lines = text.lines()
             .map { it.trim() }
             .filter { it.isNotBlank() && it.length >= 3 }
 
-        // Heuristic: first non-empty line that looks like a name (not all digits, not HP, etc.)
         val nameLine = lines.firstOrNull { line ->
             !line.matches(Regex("^[0-9/HP ]+$")) &&
             !line.startsWith("HP") &&
-            line.length <= 30
+            line.length <= 30 &&
+            // Exclude Trainer card type labels that appear above the card name
+            !CARD_TYPE_LABELS.contains(line.lowercase())
         }
         return nameLine ?: lines.firstOrNull() ?: text.take(30)
+    }
+
+    companion object {
+        // Labels printed at the top of Trainer cards — not card names
+        private val CARD_TYPE_LABELS = setOf(
+            "trainer", "item", "supporter", "stadium",
+            "trainer item", "trainer supporter", "trainer stadium",
+        )
     }
 }
